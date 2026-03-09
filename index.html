@@ -37,16 +37,6 @@ padding:10px;
 margin:10px 0;
 }
 
-.loginBox button{
-width:100%;
-padding:10px;
-background:#0077b6;
-color:white;
-border:none;
-cursor:pointer;
-border-radius:5px;
-}
-
 /* HEADER */
 
 header{
@@ -79,7 +69,7 @@ nav button:hover{
 background:#0077b6;
 }
 
-/* MAIN CONTENT */
+/* CONTENT */
 
 .container{
 padding:20px;
@@ -105,23 +95,35 @@ object-fit:cover;
 border-radius:10px;
 }
 
-button{
-padding:8px 12px;
-background:#0077b6;
-border:none;
-color:white;
-border-radius:5px;
-cursor:pointer;
-}
-
 .hidden{
 display:none;
 }
 
-input{
-padding:10px;
+/* TABLE */
+
+table{
 width:100%;
-margin-bottom:10px;
+border-collapse:collapse;
+background:white;
+}
+
+th,td{
+padding:10px;
+border:1px solid #ddd;
+text-align:center;
+}
+
+th{
+background:#0077b6;
+color:white;
+}
+
+.deleteBtn{
+background:red;
+color:white;
+border:none;
+padding:5px 10px;
+cursor:pointer;
 }
 
 </style>
@@ -149,7 +151,6 @@ margin-bottom:10px;
 
 </div>
 
-
 <!-- MAIN SYSTEM -->
 
 <div id="mainSystem" class="hidden">
@@ -162,7 +163,6 @@ margin-bottom:10px;
 <button onclick="showPage('dashboard')">Dashboard</button>
 <button onclick="showPage('doctors')">Doctors</button>
 <button onclick="showPage('patients')">Patients</button>
-<button onclick="showPage('reports')">Reports</button>
 </nav>
 
 <div class="container">
@@ -178,35 +178,30 @@ margin-bottom:10px;
 <div class="card">
 <img src="images/hospital1.jpg">
 <h3>Johns Hopkins Hospital</h3>
-<p><b>Location:</b> USA</p>
-<p>One of the world’s best hospitals known for medical research and advanced treatment.</p>
+<p>USA - Famous for medical research and advanced treatment.</p>
 </div>
 
 <div class="card">
 <img src="images/hospital2.jpg">
 <h3>Mayo Clinic</h3>
-<p><b>Location:</b> USA</p>
-<p>Globally famous hospital known for high quality healthcare and medical innovation.</p>
+<p>USA - Known worldwide for excellent healthcare services.</p>
 </div>
 
 <div class="card">
 <img src="images/hospital3.jpg">
-<h3>BLK-MAX Super Speciality Hospital</h3>
-<p><b>Location:</b> India</p>
-<p>One of Asia’s largest hospitals providing advanced surgery and treatments.</p>
+<h3>BLK-MAX Hospital</h3>
+<p>India - One of Asia's biggest super speciality hospitals.</p>
 </div>
 
 <div class="card">
 <img src="images/hospital4.jpg">
 <h3>Max Healthcare</h3>
-<p><b>Location:</b> India</p>
-<p>Known for modern healthcare technology and expert doctors.</p>
+<p>India - Modern healthcare with advanced technology.</p>
 </div>
 
 </div>
 
 </div>
-
 
 <!-- DOCTORS -->
 
@@ -220,67 +215,37 @@ margin-bottom:10px;
 
 </div>
 
-
 <!-- PATIENTS -->
 
 <div id="patients" class="hidden">
 
-<h2>🧾 Patients</h2>
+<h2>🧾 Patient Medical Records</h2>
 
-<input type="text" id="searchPatient" placeholder="Search patient">
+<table>
 
-<div id="patientList"></div>
+<thead>
+<tr>
+<th>Patient Name</th>
+<th>Disease</th>
+<th>Doctor Assigned</th>
+<th>Medical History</th>
+<th>Delete</th>
+</tr>
+</thead>
 
-</div>
+<tbody id="patientTable"></tbody>
 
-
-<!-- REPORTS -->
-
-<div id="reports" class="hidden">
-
-<h2>📄 Hospital Reports</h2>
-
-<div class="card">
-
-<h3>Patient Admission Report</h3>
-<p>
-The hospital currently manages more than 200 patients suffering
-from different illnesses including heart disease, fractures,
-allergies and respiratory diseases.
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>Doctor Availability Report</h3>
-<p>
-The hospital has more than 50 specialized doctors across
-departments like cardiology, neurology, pediatrics and oncology.
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>Medical History Report</h3>
-<p>
-Patient medical records include diagnosis, prescriptions,
-treatment progress and follow-up details stored digitally.
-</p>
+</table>
 
 </div>
 
 </div>
 
 </div>
-
-</div>
-
 
 <script>
 
-/* LOGIN FUNCTION */
+/* LOGIN */
 
 function login(){
 
@@ -294,26 +259,25 @@ document.getElementById("mainSystem").classList.remove("hidden");
 
 }else{
 
-document.getElementById("error").innerText="Invalid login";
+document.getElementById("error").innerText="Invalid Login";
 
 }
 
 }
 
-/* PAGE NAVIGATION */
+/* PAGE SWITCH */
 
 function showPage(page){
 
 document.getElementById("dashboard").classList.add("hidden");
 document.getElementById("doctors").classList.add("hidden");
 document.getElementById("patients").classList.add("hidden");
-document.getElementById("reports").classList.add("hidden");
 
 document.getElementById(page).classList.remove("hidden");
 
 }
 
-/* DOCTORS DATA */
+/* DOCTORS */
 
 const doctors=[];
 const specialities=[
@@ -355,62 +319,62 @@ const d=doctors[i];
 document.getElementById("doctorDetails").classList.remove("hidden");
 
 document.getElementById("doctorDetails").innerHTML=`
-
 <h2>${d.name}</h2>
 <p><b>Speciality:</b> ${d.speciality}</p>
 <p><b>Experience:</b> ${d.experience}</p>
 <p>${d.bio}</p>
-
 `;
 
 }
 
-/* PATIENTS */
+/* PATIENT TABLE */
 
-const patients=[];
 const illness=["Fever","Heart Disease","Skin Allergy","Fracture","Cold","Cancer","Migraine","Asthma"];
 
-for(let i=1;i<=200;i++){
+let patients=[];
+
+for(let i=1;i<=50;i++){
 
 patients.push({
 name:"Patient "+i,
-illness:illness[i%8],
-history:"Patient diagnosed with "+illness[i%8]
+disease:illness[i%8],
+doctor:doctors[i%10].name,
+history:"Treatment under "+doctors[i%10].name
 })
 
 }
 
-const patientList=document.getElementById("patientList");
+const table=document.getElementById("patientTable");
 
-function loadPatients(list){
+function loadPatients(){
 
-patientList.innerHTML="";
+table.innerHTML="";
 
-list.forEach(p=>{
+patients.forEach((p,index)=>{
 
-patientList.innerHTML+=`
-<div class="card">
-<h3>${p.name}</h3>
-<p><b>Illness:</b> ${p.illness}</p>
-<p><b>Medical History:</b> ${p.history}</p>
-</div>
+table.innerHTML+=`
+<tr>
+<td>${p.name}</td>
+<td>${p.disease}</td>
+<td>${p.doctor}</td>
+<td>${p.history}</td>
+<td><button class="deleteBtn" onclick="deletePatient(${index})">Delete</button></td>
+</tr>
 `;
 
 });
 
 }
 
-loadPatients(patients);
+function deletePatient(index){
 
-document.getElementById("searchPatient").addEventListener("keyup",function(){
+patients.splice(index,1);
 
-const val=this.value.toLowerCase();
+loadPatients();
 
-const filtered=patients.filter(p=>p.name.toLowerCase().includes(val));
+}
 
-loadPatients(filtered);
-
-});
+loadPatients();
 
 </script>
 
