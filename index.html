@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hospital Management System</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(120deg,#4facfe,#00f2fe);
+}
+
+/* HEADER */
+
+.header{
+background:#0f172a;
+color:white;
+padding:15px;
+text-align:center;
+font-size:24px;
+font-weight:bold;
+}
+
+/* LOGIN */
+
+.login-box{
+width:320px;
+margin:120px auto;
+background:white;
+padding:30px;
+border-radius:10px;
+text-align:center;
+}
+
+.login-box input{
+width:90%;
+padding:10px;
+margin:10px;
+}
+
+/* BUTTON */
+
+button{
+padding:10px 20px;
+background:#007bff;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#0056b3;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:220px;
+background:#1e293b;
+height:100vh;
+position:fixed;
+padding:20px;
+display:none;
+}
+
+.sidebar h2{
+color:white;
+}
+
+.sidebar a{
+display:block;
+color:white;
+margin:15px 0;
+cursor:pointer;
+text-decoration:none;
+}
+
+/* MAIN */
+
+.main{
+margin-left:240px;
+padding:20px;
+display:none;
+}
+
+/* DOCTOR CARDS */
+
+.cards{
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+}
+
+.card{
+background:white;
+padding:15px;
+border-radius:12px;
+width:220px;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+text-align:center;
+}
+
+.card img{
+width:90px;
+height:90px;
+border-radius:50%;
+}
+
+/* TABLE */
+
+table{
+width:90%;
+margin-top:20px;
+border-collapse:collapse;
+background:white;
+}
+
+th,td{
+padding:10px;
+border:1px solid #ccc;
+}
+
+/* DETAILS BOX */
+
+.details{
+background:white;
+padding:15px;
+margin-top:20px;
+border-radius:10px;
+box-shadow:0 2px 6px rgba(0,0,0,0.2);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">🏥 GLOBAL HOSPITAL MANAGEMENT SYSTEM 🏥</div>
+
+<!-- LOGIN -->
+
+<div class="login-box" id="loginPage">
+
+<h2>Hospital Login</h2>
+
+<input type="text" id="username" placeholder="Username">
+<input type="password" id="password" placeholder="Password">
+
+<button onclick="login()">Login</button>
+
+</div>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar" id="sidebar">
+
+<h2>Menu</h2>
+
+<a onclick="showPage('dashboard')">Dashboard</a>
+<a onclick="showPage('doctors')">Doctors</a>
+<a onclick="showPage('patients')">Patients</a>
+<a onclick="showPage('appointments')">Appointments</a>
+<a onclick="showPage('history')">Medical History</a>
+<a onclick="showPage('reports')">Reports</a>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main" id="main">
+
+<!-- DASHBOARD -->
+
+<div id="dashboard" class="page">
+
+<h2>Dashboard</h2>
+
+<p>Total Doctors: <span id="doctorCount"></span></p>
+<p>Total Patients: <span id="patientCount"></span></p>
+<p>Total Appointments: <span id="appointmentCount"></span></p>
+
+</div>
+
+<!-- DOCTORS -->
+
+<div id="doctors" class="page" style="display:none">
+
+<h2>Doctors</h2>
+
+<div id="doctorCards" class="cards"></div>
+
+<div id="doctorDetails" class="details"></div>
+
+</div>
+
+<!-- PATIENTS -->
+
+<div id="patients" class="page" style="display:none">
+
+<h2>Patients</h2>
+
+<input type="text" id="searchPatient" placeholder="Search Patient" onkeyup="searchPatient()">
+
+<table id="patientTable">
+
+<tr>
+<th>Name</th>
+<th>Age</th>
+<th>Illness</th>
+</tr>
+
+</table>
+
+</div>
+
+<!-- APPOINTMENTS -->
+
+<div id="appointments" class="page" style="display:none">
+
+<h2>Appointments</h2>
+
+<table id="appointmentTable">
+
+<tr>
+<th>Patient</th>
+<th>Doctor</th>
+<th>Date</th>
+</tr>
+
+</table>
+
+</div>
+
+<!-- MEDICAL HISTORY -->
+
+<div id="history" class="page" style="display:none">
+
+<h2>Patient Medical History</h2>
+
+<table>
+
+<tr>
+<th>Patient</th>
+<th>Diagnosis</th>
+<th>Treatment</th>
+</tr>
+
+<tr>
+<td>Patient 1</td>
+<td>Fever</td>
+<td>Medication</td>
+</tr>
+
+<tr>
+<td>Patient 2</td>
+<td>Fracture</td>
+<td>Bone Surgery</td>
+</tr>
+
+<tr>
+<td>Patient 3</td>
+<td>Heart Problem</td>
+<td>Cardiology Treatment</td>
+</tr>
+
+</table>
+
+</div>
+
+<!-- REPORTS -->
+
+<div id="reports" class="page" style="display:none">
+
+<h2>Hospital Reports</h2>
+
+<p>
+This hospital management system manages doctors, patients,
+appointments and medical records efficiently.
+</p>
+
+<p>
+The system helps hospital staff track patient illnesses,
+doctor specializations, and treatment history.
+</p>
+
+<p>
+It improves hospital workflow and reduces manual record keeping.
+</p>
+
+</div>
+
+</div>
+
+<script>
+
+let doctors=[]
+let illnesses=["Fever","Cold","Heart Disease","Fracture","Skin Allergy","Diabetes"]
+
+function login(){
+
+let u=document.getElementById("username").value
+let p=document.getElementById("password").value
+
+if(u=="admin" && p=="1234"){
+
+document.getElementById("loginPage").style.display="none"
+document.getElementById("sidebar").style.display="block"
+document.getElementById("main").style.display="block"
+
+loadDoctors()
+loadPatients()
+loadAppointments()
+
+}
+
+else{
+alert("Invalid Login")
+}
+
+}
+
+function showPage(page){
+
+let pages=document.getElementsByClassName("page")
+
+for(let i=0;i<pages.length;i++){
+pages[i].style.display="none"
+}
+
+document.getElementById(page).style.display="block"
+
+}
+
+/* DOCTORS */
+
+function loadDoctors(){
+
+let container=document.getElementById("doctorCards")
+
+for(let i=1;i<=50;i++){
+
+let name="Dr. Doctor "+i
+let spec="Specialist "+i
+
+let card=document.createElement("div")
+card.className="card"
+
+card.innerHTML=`
+<img src="https://i.pravatar.cc/90?img=${i}">
+<h4>${name}</h4>
+<p>${spec}</p>
+<button onclick="showDoctor('${name}','${spec}')">View Details</button>
+`
+
+container.appendChild(card)
+
+doctors.push(name)
+
+}
+
+document.getElementById("doctorCount").innerText=50
+
+}
+
+function showDoctor(name,spec){
+
+document.getElementById("doctorDetails").innerHTML=
+"<h3>"+name+"</h3>"+
+"<p>Specialization: "+spec+"</p>"+
+"<p>Experience: 10 Years</p>"+
+"<p>Hospital: Global Medical Center</p>"
+
+}
+
+/* PATIENTS */
+
+function loadPatients(){
+
+let table=document.getElementById("patientTable")
+
+for(let i=1;i<=200;i++){
+
+let illness=illnesses[Math.floor(Math.random()*illnesses.length)]
+
+let row=table.insertRow()
+
+row.insertCell(0).innerHTML="Patient "+i
+row.insertCell(1).innerHTML=Math.floor(Math.random()*60)+20
+row.insertCell(2).innerHTML=illness
+
+}
+
+document.getElementById("patientCount").innerText=200
+
+}
+
+function searchPatient(){
+
+let input=document.getElementById("searchPatient").value.toLowerCase()
+
+let rows=document.getElementById("patientTable").rows
+
+for(let i=1;i<rows.length;i++){
+
+let name=rows[i].cells[0].innerText.toLowerCase()
+
+rows[i].style.display=name.includes(input)?"":"none"
+
+}
+
+}
+
+/* APPOINTMENTS */
+
+function loadAppointments(){
+
+let table=document.getElementById("appointmentTable")
+
+for(let i=1;i<=50;i++){
+
+let row=table.insertRow()
+
+row.insertCell(0).innerHTML="Patient "+Math.floor(Math.random()*200)
+row.insertCell(1).innerHTML="Dr. "+Math.floor(Math.random()*50)
+row.insertCell(2).innerHTML="2026-03-"+(Math.floor(Math.random()*28)+1)
+
+}
+
+document.getElementById("appointmentCount").innerText=50
+
+}
+
+</script>
+
+</body>
+</html>
