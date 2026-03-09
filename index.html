@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <title>🏥 Hospital Management System</title>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
 <style>
 
 body{
@@ -12,7 +14,7 @@ margin:0;
 background:#f4f6f9;
 }
 
-/* LOGIN PAGE */
+/* LOGIN */
 
 #loginPage{
 display:flex;
@@ -126,6 +128,15 @@ padding:5px 10px;
 cursor:pointer;
 }
 
+.downloadBtn{
+background:green;
+color:white;
+border:none;
+padding:10px;
+margin-bottom:10px;
+cursor:pointer;
+}
+
 </style>
 </head>
 
@@ -150,6 +161,7 @@ cursor:pointer;
 </div>
 
 </div>
+
 
 <!-- MAIN SYSTEM -->
 
@@ -178,25 +190,25 @@ cursor:pointer;
 <div class="card">
 <img src="images/hospital1.jpg">
 <h3>Johns Hopkins Hospital</h3>
-<p>USA - Famous for medical research and advanced treatment.</p>
+<p>USA – Famous for medical research and innovative treatment.</p>
 </div>
 
 <div class="card">
 <img src="images/hospital2.jpg">
 <h3>Mayo Clinic</h3>
-<p>USA - Known worldwide for excellent healthcare services.</p>
+<p>USA – One of the world's best hospitals for healthcare services.</p>
 </div>
 
 <div class="card">
 <img src="images/hospital3.jpg">
-<h3>BLK-MAX Hospital</h3>
-<p>India - One of Asia's biggest super speciality hospitals.</p>
+<h3>BLK-MAX Super Speciality Hospital</h3>
+<p>India – Known for advanced surgery and cancer treatment.</p>
 </div>
 
 <div class="card">
 <img src="images/hospital4.jpg">
 <h3>Max Healthcare</h3>
-<p>India - Modern healthcare with advanced technology.</p>
+<p>India – Modern hospital with world-class doctors.</p>
 </div>
 
 </div>
@@ -220,6 +232,8 @@ cursor:pointer;
 <div id="patients" class="hidden">
 
 <h2>🧾 Patient Medical Records</h2>
+
+<button class="downloadBtn" onclick="downloadExcel()">Download Excel</button>
 
 <table>
 
@@ -327,7 +341,7 @@ document.getElementById("doctorDetails").innerHTML=`
 
 }
 
-/* PATIENT TABLE */
+/* PATIENT DATA */
 
 const illness=["Fever","Heart Disease","Skin Allergy","Fracture","Cold","Cancer","Migraine","Asthma"];
 
@@ -375,6 +389,20 @@ loadPatients();
 }
 
 loadPatients();
+
+/* DOWNLOAD EXCEL */
+
+function downloadExcel(){
+
+const worksheet=XLSX.utils.json_to_sheet(patients);
+
+const workbook=XLSX.utils.book_new();
+
+XLSX.utils.book_append_sheet(workbook,worksheet,"Patients");
+
+XLSX.writeFile(workbook,"Hospital_Patient_Data.xlsx");
+
+}
 
 </script>
 
