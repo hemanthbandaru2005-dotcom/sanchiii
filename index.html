@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>🏥 Hospital Management System</title>
+<title>Hospital Management System</title>
 
 <style>
 
@@ -12,14 +12,51 @@ margin:0;
 background:#f4f6f9;
 }
 
+/* HEADER */
+
 header{
 background:#0077b6;
 color:white;
-padding:15px;
 text-align:center;
-font-size:24px;
+padding:15px;
+font-size:22px;
 font-weight:bold;
 }
+
+/* LOGIN */
+
+#loginPage{
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.loginBox{
+background:white;
+padding:30px;
+border-radius:10px;
+box-shadow:0 3px 10px rgba(0,0,0,0.3);
+width:300px;
+text-align:center;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:10px 0;
+}
+
+button{
+padding:10px;
+background:#0077b6;
+color:white;
+border:none;
+cursor:pointer;
+border-radius:5px;
+}
+
+/* NAV */
 
 nav{
 display:flex;
@@ -40,52 +77,65 @@ nav button:hover{
 background:#0077b6;
 }
 
+/* CONTENT */
+
 .container{
 padding:20px;
-}
-
-.card{
-background:white;
-padding:15px;
-margin:10px;
-border-radius:10px;
-box-shadow:0 2px 6px rgba(0,0,0,0.2);
 }
 
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:15px;
+gap:20px;
 }
 
-img{
-width:100%;
+.card{
+background:white;
+padding:15px;
 border-radius:10px;
+box-shadow:0 3px 8px rgba(0,0,0,0.2);
+text-align:center;
 }
 
-button{
-padding:8px 12px;
-background:#0077b6;
-border:none;
-color:white;
-border-radius:5px;
-cursor:pointer;
+.card img{
+width:100%;
+height:150px;
+object-fit:cover;
+border-radius:10px;
 }
 
 .hidden{
 display:none;
 }
 
-input{
-padding:10px;
-width:100%;
-margin-bottom:10px;
-}
-
 </style>
 </head>
 
 <body>
+
+<!-- LOGIN PAGE -->
+
+<div id="loginPage">
+
+<div class="loginBox">
+
+<h2>🏥 Login</h2>
+
+<input type="text" id="username" placeholder="Username">
+
+<input type="password" id="password" placeholder="Password">
+
+<button onclick="login()">Login</button>
+
+<p id="error" style="color:red"></p>
+
+</div>
+
+</div>
+
+<!-- MAIN SYSTEM -->
+
+<div id="mainSystem" class="hidden">
 
 <header>
 🏥✨ **HOSPITAL MANAGEMENT SYSTEM** ✨🏥
@@ -101,70 +151,60 @@ margin-bottom:10px;
 <div class="container">
 
 <!-- DASHBOARD -->
-<!-- DASHBOARD -->
 
 <div id="dashboard">
 
-<h2 style="text-align:center;">🌍 Famous Hospitals Around The World</h2>
+<h2>🌍 Famous Hospitals Around The World</h2>
 
 <div class="grid">
 
 <div class="card">
 <img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Mayo_Clinic.jpg">
 <h3>Mayo Clinic</h3>
-<p>📍 Rochester, USA</p>
-<p>One of the best hospitals in the world known for advanced research and patient care.</p>
+<p>USA</p>
 </div>
 
 <div class="card">
 <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Apollo_Hospital_Chennai.jpg">
 <h3>Apollo Hospital</h3>
-<p>📍 Chennai, India</p>
-<p>A leading healthcare provider in Asia offering world-class treatment.</p>
+<p>India</p>
 </div>
 
 <div class="card">
 <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Cleveland_Clinic.jpg">
 <h3>Cleveland Clinic</h3>
-<p>📍 Ohio, USA</p>
-<p>Globally recognized hospital specializing in heart surgery and research.</p>
+<p>USA</p>
 </div>
 
 <div class="card">
 <img src="https://upload.wikimedia.org/wikipedia/commons/7/70/Johns_Hopkins_Hospital.jpg">
 <h3>Johns Hopkins Hospital</h3>
-<p>📍 Baltimore, USA</p>
-<p>Famous for medical education, research, and innovative treatments.</p>
+<p>USA</p>
 </div>
 
 <div class="card">
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/66/Singapore_General_Hospital.jpg">
 <h3>Singapore General Hospital</h3>
-<p>📍 Singapore</p>
-<p>One of Asia's most advanced hospitals providing modern healthcare services.</p>
+<p>Singapore</p>
 </div>
 
 <div class="card">
 <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Charite_Berlin.jpg">
 <h3>Charité Hospital</h3>
-<p>📍 Berlin, Germany</p>
-<p>Europe’s largest university hospital known for medical innovation.</p>
+<p>Germany</p>
 </div>
 
 </div>
 
 </div>
 
-
-<!-- DOCTORS -->
+<!-- DOCTORS PAGE -->
 
 <div id="doctors" class="hidden">
 
 <h2>👨‍⚕️ Doctors</h2>
 
-<div class="grid" id="doctorList"></div>
-
-<div id="doctorDetails" class="card hidden"></div>
+<p>Doctor list will appear here.</p>
 
 </div>
 
@@ -174,9 +214,7 @@ margin-bottom:10px;
 
 <h2>🧾 Patients</h2>
 
-<input type="text" id="searchPatient" placeholder="Search patient">
-
-<div id="patientList"></div>
+<p>Patient list will appear here.</p>
 
 </div>
 
@@ -184,41 +222,9 @@ margin-bottom:10px;
 
 <div id="reports" class="hidden">
 
-<h2>📄 Hospital Reports</h2>
+<h2>📄 Reports</h2>
 
-<div class="card">
-
-<h3>Patient Admission Report</h3>
-<p>
-This report explains the number of patients admitted in the hospital
-for different illnesses. The hospital currently manages over
-200 active patients across departments including cardiology,
-neurology, orthopedics, dermatology and pediatrics.
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>Doctor Availability Report</h3>
-<p>
-The hospital employs more than 50 specialized doctors
-covering a wide range of medical services including
-heart surgery, oncology treatment, neurology consultation
-and pediatric healthcare.
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>Medical History Report</h3>
-<p>
-Patient medical history is stored digitally to track
-diagnosis, treatment history, prescriptions and follow-up
-appointments. This helps doctors provide better treatment
-and faster recovery.
-</p>
+<p>This section contains hospital reports including patient admission reports, doctor availability reports, and treatment summaries.</p>
 
 </div>
 
@@ -227,6 +233,28 @@ and faster recovery.
 </div>
 
 <script>
+
+/* LOGIN */
+
+function login(){
+
+let user=document.getElementById("username").value;
+let pass=document.getElementById("password").value;
+
+if(user=="admin" && pass=="1234"){
+
+document.getElementById("loginPage").style.display="none";
+document.getElementById("mainSystem").classList.remove("hidden");
+
+}else{
+
+document.getElementById("error").innerText="Invalid login";
+
+}
+
+}
+
+/* PAGE SWITCH */
 
 function showPage(page){
 
@@ -238,106 +266,6 @@ document.getElementById("reports").classList.add("hidden");
 document.getElementById(page).classList.remove("hidden");
 
 }
-
-const doctors=[];
-
-const specialities=[
-"Cardiologist","Neurologist","Dermatologist","Orthopedic",
-"Pediatrician","Psychiatrist","Oncologist","Radiologist",
-"ENT Specialist","Dentist"
-];
-
-for(let i=1;i<=50;i++){
-
-doctors.push({
-name:"Dr. Doctor "+i,
-speciality:specialities[i%10],
-experience:(5+i)+" years",
-bio:"Experienced doctor specialized in "+specialities[i%10]+" treating many patients successfully."
-})
-
-}
-
-const doctorList=document.getElementById("doctorList");
-
-doctors.forEach((d,i)=>{
-
-doctorList.innerHTML+=`
-<div class="card">
-<img src="https://randomuser.me/api/portraits/men/${i}.jpg">
-<h3>${d.name}</h3>
-<p>${d.speciality}</p>
-<button onclick="viewDoctor(${i})">View Details</button>
-</div>
-`;
-
-});
-
-function viewDoctor(i){
-
-const d=doctors[i];
-
-document.getElementById("doctorDetails").classList.remove("hidden");
-
-document.getElementById("doctorDetails").innerHTML=`
-
-<h2>${d.name}</h2>
-
-<p><b>Speciality:</b> ${d.speciality}</p>
-
-<p><b>Experience:</b> ${d.experience}</p>
-
-<p><b>Biography:</b> ${d.bio}</p>
-
-`;
-
-}
-
-const patients=[];
-
-const illness=["Fever","Heart Disease","Skin Allergy","Fracture","Cold","Cancer","Migraine","Asthma"];
-
-for(let i=1;i<=200;i++){
-
-patients.push({
-name:"Patient "+i,
-illness:illness[i%8],
-history:"Patient diagnosed with "+illness[i%8]+" and undergoing treatment."
-})
-
-}
-
-const patientList=document.getElementById("patientList");
-
-function loadPatients(list){
-
-patientList.innerHTML="";
-
-list.forEach(p=>{
-
-patientList.innerHTML+=`
-<div class="card">
-<h3>${p.name}</h3>
-<p><b>Illness:</b> ${p.illness}</p>
-<p><b>Medical History:</b> ${p.history}</p>
-</div>
-`;
-
-});
-
-}
-
-loadPatients(patients);
-
-document.getElementById("searchPatient").addEventListener("keyup",function(){
-
-const val=this.value.toLowerCase();
-
-const filtered=patients.filter(p=>p.name.toLowerCase().includes(val));
-
-loadPatients(filtered);
-
-});
 
 </script>
 
