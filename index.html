@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>🏥 Hospital Management System</title>
+<title>Hospital Management System</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
@@ -11,7 +11,7 @@
 body{
 font-family:Arial;
 margin:0;
-background:#f4f6f9;
+background:#f2f6fc;
 }
 
 /* LOGIN */
@@ -21,7 +21,7 @@ display:flex;
 justify-content:center;
 align-items:center;
 height:100vh;
-background:#0077b6;
+background:#0a6ebd;
 }
 
 .loginBox{
@@ -30,7 +30,6 @@ padding:30px;
 border-radius:10px;
 width:300px;
 text-align:center;
-box-shadow:0 4px 10px rgba(0,0,0,0.3);
 }
 
 .loginBox input{
@@ -42,12 +41,11 @@ margin:10px 0;
 /* HEADER */
 
 header{
-background:#0077b6;
+background:#0a6ebd;
 color:white;
 padding:15px;
 text-align:center;
 font-size:24px;
-font-weight:bold;
 }
 
 /* NAV */
@@ -55,27 +53,31 @@ font-weight:bold;
 nav{
 display:flex;
 justify-content:center;
-background:#023e8a;
+background:#084c8d;
 }
 
 nav button{
 background:none;
 border:none;
 color:white;
-padding:15px 20px;
+padding:15px;
 font-size:16px;
 cursor:pointer;
 }
 
 nav button:hover{
-background:#0077b6;
+background:#0a6ebd;
 }
-
-/* CONTENT */
 
 .container{
 padding:20px;
 }
+
+.hidden{
+display:none;
+}
+
+/* GRID */
 
 .grid{
 display:grid;
@@ -83,21 +85,21 @@ grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:20px;
 }
 
+/* CARD */
+
 .card{
 background:white;
 padding:20px;
 border-radius:10px;
-box-shadow:0 2px 8px rgba(0,0,0,0.2);
 text-align:center;
+box-shadow:0 2px 8px rgba(0,0,0,0.2);
 }
 
-.card h2{
-margin:10px 0;
-color:#0077b6;
-}
-
-.hidden{
-display:none;
+.card img{
+width:100px;
+height:100px;
+border-radius:50%;
+object-fit:cover;
 }
 
 /* TABLE */
@@ -109,21 +111,23 @@ background:white;
 }
 
 th,td{
-padding:10px;
 border:1px solid #ddd;
+padding:10px;
 text-align:center;
 }
 
 th{
-background:#0077b6;
+background:#0a6ebd;
 color:white;
 }
+
+/* BUTTONS */
 
 .deleteBtn{
 background:red;
 color:white;
 border:none;
-padding:5px 10px;
+padding:6px 10px;
 cursor:pointer;
 }
 
@@ -133,7 +137,6 @@ color:white;
 border:none;
 padding:10px;
 margin-bottom:10px;
-cursor:pointer;
 }
 
 </style>
@@ -141,16 +144,15 @@ cursor:pointer;
 
 <body>
 
-<!-- LOGIN PAGE -->
+<!-- LOGIN -->
 
 <div id="loginPage">
 
 <div class="loginBox">
 
-<h2>🏥 Hospital Login</h2>
+<h2>Hospital Login</h2>
 
 <input type="text" id="username" placeholder="Username">
-
 <input type="password" id="password" placeholder="Password">
 
 <button onclick="login()">Login</button>
@@ -162,18 +164,17 @@ cursor:pointer;
 </div>
 
 
-<!-- MAIN SYSTEM -->
+<!-- MAIN -->
 
 <div id="mainSystem" class="hidden">
 
-<header>
-🏥✨ HOSPITAL MANAGEMENT SYSTEM ✨🏥
-</header>
+<header>🏥 Hospital Management System</header>
 
 <nav>
 <button onclick="showPage('dashboard')">Dashboard</button>
 <button onclick="showPage('doctors')">Doctors</button>
 <button onclick="showPage('patients')">Patients</button>
+<button onclick="showPage('appointments')">Appointments</button>
 </nav>
 
 <div class="container">
@@ -182,101 +183,24 @@ cursor:pointer;
 
 <div id="dashboard">
 
-<h2>🏥 Hospital Dashboard</h2>
+<h2>Hospital Dashboard</h2>
 
 <div class="grid">
 
-<div class="card">
-<h3>Total Nurses 👩‍⚕️</h3>
-<h2>45</h2>
-<p>Nurses working in the hospital.</p>
-</div>
-
-<div class="card">
-<h3>Total Staff 👨‍💼</h3>
-<h2>120</h2>
-<p>Receptionists, technicians and other staff.</p>
-</div>
-
-<div class="card">
-<h3>Emergency Cases 🚑</h3>
-<h2>18</h2>
-<p>Emergency patients today.</p>
-</div>
-
-<div class="card">
-<h3>Discharged Patients 📤</h3>
-<h2>12</h2>
-<p>Patients discharged today.</p>
-</div>
-
-<div class="card">
-<h3>Admitted Patients 🛌</h3>
-<h2>67</h2>
-<p>Currently admitted patients.</p>
-</div>
-
-<div class="card">
-<h3>Laboratory Reports 🔬</h3>
-<h2>95</h2>
-<p>Lab tests generated today.</p>
-</div>
-
-<div class="card">
-<h3>Pharmacy Orders 💊</h3>
-<h2>130</h2>
-<p>Medicines issued from pharmacy.</p>
-</div>
-
-<div class="card">
-<h3>Operation / Surgery Schedule 🔪</h3>
-<h2>6</h2>
-<p>Surgeries scheduled today.</p>
-</div>
-
-<div class="card">
-<h3>Billing / Payments 💳</h3>
-<h2>₹2,35,000</h2>
-<p>Total payments received.</p>
-</div>
-
-<div class="card">
-<h3>Ambulance Requests 🚑</h3>
-<h2>9</h2>
-<p>Ambulance bookings today.</p>
-</div>
-
-<div class="card">
-<h3>Departments 🏢</h3>
-<p>
-Cardiology<br>
-Neurology<br>
-Orthopedics<br>
-Dermatology<br>
-Pediatrics
-</p>
-</div>
-
-<div class="card">
-<h3>Upcoming Appointments ⏰</h3>
-<p>
-10:00 AM – Dr. Smith<br>
-11:30 AM – Dr. Kumar<br>
-1:00 PM – Dr. John<br>
-3:00 PM – Dr. Ravi
-</p>
-</div>
+<div class="card"><h3>Doctors</h3><h2>10</h2></div>
+<div class="card"><h3>Patients</h3><h2>20</h2></div>
+<div class="card"><h3>Nurses</h3><h2>25</h2></div>
+<div class="card"><h3>Emergency Cases</h3><h2>5</h2></div>
 
 </div>
 
 </div>
-
 
 <!-- DOCTORS -->
 
 <div id="doctors" class="hidden">
 
-<h2>👨‍⚕️ Doctors</h2>
+<h2>Doctors</h2>
 
 <div class="grid" id="doctorList"></div>
 
@@ -289,7 +213,7 @@ Pediatrics
 
 <div id="patients" class="hidden">
 
-<h2>🧾 Patient Medical Records</h2>
+<h2>Patient Records</h2>
 
 <button class="downloadBtn" onclick="downloadExcel()">Download Excel</button>
 
@@ -297,10 +221,10 @@ Pediatrics
 
 <thead>
 <tr>
-<th>Patient Name</th>
+<th>Name</th>
 <th>Disease</th>
-<th>Doctor Assigned</th>
-<th>Medical History</th>
+<th>Doctor</th>
+<th>History</th>
 <th>Delete</th>
 </tr>
 </thead>
@@ -311,10 +235,26 @@ Pediatrics
 
 </div>
 
-</div>
+
+<!-- APPOINTMENTS -->
+
+<div id="appointments" class="hidden">
+
+<h2>Appointment Booking</h2>
+
+<input type="text" id="pname" placeholder="Patient Name">
+<input type="text" id="dname" placeholder="Doctor Name">
+<input type="date" id="date">
+
+<button onclick="bookAppointment()">Book Appointment</button>
+
+<ul id="appointmentList"></ul>
 
 </div>
 
+</div>
+
+</div>
 
 <script>
 
@@ -322,10 +262,10 @@ Pediatrics
 
 function login(){
 
-let user=document.getElementById("username").value;
-let pass=document.getElementById("password").value;
+let u=document.getElementById("username").value;
+let p=document.getElementById("password").value;
 
-if(user==="admin" && pass==="1234"){
+if(u==="admin" && p==="1234"){
 
 document.getElementById("loginPage").style.display="none";
 document.getElementById("mainSystem").classList.remove("hidden");
@@ -345,6 +285,7 @@ function showPage(page){
 document.getElementById("dashboard").classList.add("hidden");
 document.getElementById("doctors").classList.add("hidden");
 document.getElementById("patients").classList.add("hidden");
+document.getElementById("appointments").classList.add("hidden");
 
 document.getElementById(page).classList.remove("hidden");
 
@@ -352,34 +293,97 @@ document.getElementById(page).classList.remove("hidden");
 
 /* DOCTORS */
 
-const doctors=[];
-const specialities=[
-"Cardiologist","Neurologist","Dermatologist","Orthopedic",
-"Pediatrician","Psychiatrist","Oncologist","Radiologist",
-"ENT Specialist","Dentist"
-];
-
-for(let i=1;i<=50;i++){
-
-doctors.push({
-name:"Dr. Doctor "+i,
-speciality:specialities[i%10],
-experience:(5+i)+" years",
-bio:"Experienced doctor specialized in "+specialities[i%10]
-})
-
+const doctors=[
+{
+name:"Dr. John Smith",
+spec:"Cardiologist",
+exp:"12 years",
+phone:"9876543210",
+photo:"https://randomuser.me/api/portraits/men/11.jpg"
+},
+{
+name:"Dr. Ravi Kumar",
+spec:"Neurologist",
+exp:"10 years",
+phone:"9876543211",
+photo:"https://randomuser.me/api/portraits/men/12.jpg"
+},
+{
+name:"Dr. Priya Sharma",
+spec:"Dermatologist",
+exp:"8 years",
+phone:"9876543212",
+photo:"https://randomuser.me/api/portraits/women/13.jpg"
+},
+{
+name:"Dr. David Lee",
+spec:"Orthopedic",
+exp:"15 years",
+phone:"9876543213",
+photo:"https://randomuser.me/api/portraits/men/14.jpg"
+},
+{
+name:"Dr. Anjali Mehta",
+spec:"Pediatrician",
+exp:"7 years",
+phone:"9876543214",
+photo:"https://randomuser.me/api/portraits/women/15.jpg"
+},
+{
+name:"Dr. Rahul Das",
+spec:"Dentist",
+exp:"9 years",
+phone:"9876543215",
+photo:"https://randomuser.me/api/portraits/men/16.jpg"
+},
+{
+name:"Dr. Neha Kapoor",
+spec:"Psychiatrist",
+exp:"11 years",
+phone:"9876543216",
+photo:"https://randomuser.me/api/portraits/women/17.jpg"
+},
+{
+name:"Dr. Arjun Patel",
+spec:"Radiologist",
+exp:"6 years",
+phone:"9876543217",
+photo:"https://randomuser.me/api/portraits/men/18.jpg"
+},
+{
+name:"Dr. Sara Khan",
+spec:"ENT Specialist",
+exp:"8 years",
+phone:"9876543218",
+photo:"https://randomuser.me/api/portraits/women/19.jpg"
+},
+{
+name:"Dr. Michael Brown",
+spec:"Oncologist",
+exp:"14 years",
+phone:"9876543219",
+photo:"https://randomuser.me/api/portraits/men/20.jpg"
 }
+];
 
 const doctorList=document.getElementById("doctorList");
 
 doctors.forEach((d,i)=>{
 
 doctorList.innerHTML+=`
+
 <div class="card">
+
+<img src="${d.photo}">
+
 <h3>${d.name}</h3>
-<p>${d.speciality}</p>
+
+<p>${d.spec}</p>
+
 <button onclick="viewDoctor(${i})">View Details</button>
+
 </div>
+
 `;
 
 });
@@ -391,27 +395,36 @@ const d=doctors[i];
 document.getElementById("doctorDetails").classList.remove("hidden");
 
 document.getElementById("doctorDetails").innerHTML=`
+
+<img src="${d.photo}">
+
 <h2>${d.name}</h2>
-<p><b>Speciality:</b> ${d.speciality}</p>
-<p><b>Experience:</b> ${d.experience}</p>
-<p>${d.bio}</p>
+
+<p><b>Specialization:</b> ${d.spec}</p>
+
+<p><b>Experience:</b> ${d.exp}</p>
+
+<p><b>Phone:</b> ${d.phone}</p>
+
+<p>Highly experienced doctor providing excellent treatment.</p>
+
 `;
 
 }
 
-/* PATIENT DATA */
+/* PATIENTS */
 
-const illness=["Fever","Heart Disease","Skin Allergy","Fracture","Cold","Cancer","Migraine","Asthma"];
+const illness=["Fever","Heart Disease","Cold","Cancer","Fracture"];
 
 let patients=[];
 
-for(let i=1;i<=50;i++){
+for(let i=1;i<=20;i++){
 
 patients.push({
 name:"Patient "+i,
-disease:illness[i%8],
+disease:illness[i%5],
 doctor:doctors[i%10].name,
-history:"Treatment under "+doctors[i%10].name
+history:"Regular treatment"
 })
 
 }
@@ -425,22 +438,31 @@ table.innerHTML="";
 patients.forEach((p,index)=>{
 
 table.innerHTML+=`
+
 <tr>
+
 <td>${p.name}</td>
 <td>${p.disease}</td>
 <td>${p.doctor}</td>
 <td>${p.history}</td>
-<td><button class="deleteBtn" onclick="deletePatient(${index})">Delete</button></td>
+
+<td>
+<button class="deleteBtn" onclick="deletePatient(${index})">
+Delete
+</button>
+</td>
+
 </tr>
+
 `;
 
 });
 
 }
 
-function deletePatient(index){
+function deletePatient(i){
 
-patients.splice(index,1);
+patients.splice(i,1);
 
 loadPatients();
 
@@ -448,7 +470,7 @@ loadPatients();
 
 loadPatients();
 
-/* DOWNLOAD EXCEL */
+/* EXCEL */
 
 function downloadExcel(){
 
@@ -458,7 +480,23 @@ const workbook=XLSX.utils.book_new();
 
 XLSX.utils.book_append_sheet(workbook,worksheet,"Patients");
 
-XLSX.writeFile(workbook,"Hospital_Patient_Data.xlsx");
+XLSX.writeFile(workbook,"Patients.xlsx");
+
+}
+
+/* APPOINTMENT */
+
+function bookAppointment(){
+
+let pname=document.getElementById("pname").value;
+let dname=document.getElementById("dname").value;
+let date=document.getElementById("date").value;
+
+let li=document.createElement("li");
+
+li.innerText=pname+" appointment with "+dname+" on "+date;
+
+document.getElementById("appointmentList").appendChild(li);
 
 }
 
