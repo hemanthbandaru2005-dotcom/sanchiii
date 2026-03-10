@@ -147,22 +147,14 @@ margin-bottom:10px;
 <!-- LOGIN -->
 
 <div id="loginPage">
-
 <div class="loginBox">
-
 <h2>Hospital Login</h2>
-
 <input type="text" id="username" placeholder="Username">
 <input type="password" id="password" placeholder="Password">
-
 <button onclick="login()">Login</button>
-
 <p id="error" style="color:red"></p>
-
 </div>
-
 </div>
-
 
 <!-- MAIN -->
 
@@ -187,10 +179,77 @@ margin-bottom:10px;
 
 <div class="grid">
 
-<div class="card"><h3>Doctors</h3><h2>10</h2></div>
-<div class="card"><h3>Patients</h3><h2>20</h2></div>
-<div class="card"><h3>Nurses</h3><h2>25</h2></div>
-<div class="card"><h3>Emergency Cases</h3><h2>5</h2></div>
+<div class="card">
+<h3>Total Nurses 👩‍⚕️</h3>
+<h2>25</h2>
+<p>Shows nurses working in hospital.</p>
+</div>
+
+<div class="card">
+<h3>Total Staff 👨‍💼</h3>
+<h2>60</h2>
+<p>Receptionists and technicians.</p>
+</div>
+
+<div class="card">
+<h3>Emergency Cases 🚑</h3>
+<h2>5</h2>
+</div>
+
+<div class="card">
+<h3>Discharged Patients 📤</h3>
+<h2>8</h2>
+</div>
+
+<div class="card">
+<h3>Admitted Patients 🛌</h3>
+<h2>20</h2>
+</div>
+
+<div class="card">
+<h3>Laboratory Reports 🔬</h3>
+<h2>40</h2>
+</div>
+
+<div class="card">
+<h3>Pharmacy Orders 💊</h3>
+<h2>55</h2>
+</div>
+
+<div class="card">
+<h3>Surgery Schedule 🔪</h3>
+<h2>3</h2>
+</div>
+
+<div class="card">
+<h3>Billing / Payments 💳</h3>
+<h2>₹1,20,000</h2>
+</div>
+
+<div class="card">
+<h3>Ambulance Requests 🚑</h3>
+<h2>4</h2>
+</div>
+
+<div class="card">
+<h3>Departments 🏢</h3>
+<p>
+Cardiology<br>
+Neurology<br>
+Orthopedics<br>
+Dermatology<br>
+Pediatrics
+</p>
+</div>
+
+<div class="card">
+<h3>Upcoming Appointments ⏰</h3>
+<p>
+10:00 AM – Dr John<br>
+11:30 AM – Dr Ravi<br>
+1:00 PM – Dr Priya
+</p>
+</div>
 
 </div>
 
@@ -207,7 +266,6 @@ margin-bottom:10px;
 <div id="doctorDetails" class="card hidden"></div>
 
 </div>
-
 
 <!-- PATIENTS -->
 
@@ -235,7 +293,6 @@ margin-bottom:10px;
 
 </div>
 
-
 <!-- APPOINTMENTS -->
 
 <div id="appointments" class="hidden">
@@ -253,7 +310,6 @@ margin-bottom:10px;
 </div>
 
 </div>
-
 </div>
 
 <script>
@@ -266,14 +322,11 @@ let u=document.getElementById("username").value;
 let p=document.getElementById("password").value;
 
 if(u==="admin" && p==="1234"){
-
 document.getElementById("loginPage").style.display="none";
 document.getElementById("mainSystem").classList.remove("hidden");
-
-}else{
-
+}
+else{
 document.getElementById("error").innerText="Invalid Login";
-
 }
 
 }
@@ -294,76 +347,18 @@ document.getElementById(page).classList.remove("hidden");
 /* DOCTORS */
 
 const doctors=[
-{
-name:"Dr. John Smith",
-spec:"Cardiologist",
-exp:"12 years",
-phone:"9876543210",
-photo:"https://randomuser.me/api/portraits/men/11.jpg"
-},
-{
-name:"Dr. Ravi Kumar",
-spec:"Neurologist",
-exp:"10 years",
-phone:"9876543211",
-photo:"https://randomuser.me/api/portraits/men/12.jpg"
-},
-{
-name:"Dr. Priya Sharma",
-spec:"Dermatologist",
-exp:"8 years",
-phone:"9876543212",
-photo:"https://randomuser.me/api/portraits/women/13.jpg"
-},
-{
-name:"Dr. David Lee",
-spec:"Orthopedic",
-exp:"15 years",
-phone:"9876543213",
-photo:"https://randomuser.me/api/portraits/men/14.jpg"
-},
-{
-name:"Dr. Anjali Mehta",
-spec:"Pediatrician",
-exp:"7 years",
-phone:"9876543214",
-photo:"https://randomuser.me/api/portraits/women/15.jpg"
-},
-{
-name:"Dr. Rahul Das",
-spec:"Dentist",
-exp:"9 years",
-phone:"9876543215",
-photo:"https://randomuser.me/api/portraits/men/16.jpg"
-},
-{
-name:"Dr. Neha Kapoor",
-spec:"Psychiatrist",
-exp:"11 years",
-phone:"9876543216",
-photo:"https://randomuser.me/api/portraits/women/17.jpg"
-},
-{
-name:"Dr. Arjun Patel",
-spec:"Radiologist",
-exp:"6 years",
-phone:"9876543217",
-photo:"https://randomuser.me/api/portraits/men/18.jpg"
-},
-{
-name:"Dr. Sara Khan",
-spec:"ENT Specialist",
-exp:"8 years",
-phone:"9876543218",
-photo:"https://randomuser.me/api/portraits/women/19.jpg"
-},
-{
-name:"Dr. Michael Brown",
-spec:"Oncologist",
-exp:"14 years",
-phone:"9876543219",
-photo:"https://randomuser.me/api/portraits/men/20.jpg"
-}
+
+{name:"Dr John Smith",spec:"Cardiologist",exp:"12 years",phone:"9876543210",photo:"https://randomuser.me/api/portraits/men/11.jpg"},
+{name:"Dr Ravi Kumar",spec:"Neurologist",exp:"10 years",phone:"9876543211",photo:"https://randomuser.me/api/portraits/men/12.jpg"},
+{name:"Dr Priya Sharma",spec:"Dermatologist",exp:"8 years",phone:"9876543212",photo:"https://randomuser.me/api/portraits/women/13.jpg"},
+{name:"Dr David Lee",spec:"Orthopedic",exp:"15 years",phone:"9876543213",photo:"https://randomuser.me/api/portraits/men/14.jpg"},
+{name:"Dr Anjali Mehta",spec:"Pediatrician",exp:"7 years",phone:"9876543214",photo:"https://randomuser.me/api/portraits/women/15.jpg"},
+{name:"Dr Rahul Das",spec:"Dentist",exp:"9 years",phone:"9876543215",photo:"https://randomuser.me/api/portraits/men/16.jpg"},
+{name:"Dr Neha Kapoor",spec:"Psychiatrist",exp:"11 years",phone:"9876543216",photo:"https://randomuser.me/api/portraits/women/17.jpg"},
+{name:"Dr Arjun Patel",spec:"Radiologist",exp:"6 years",phone:"9876543217",photo:"https://randomuser.me/api/portraits/men/18.jpg"},
+{name:"Dr Sara Khan",spec:"ENT Specialist",exp:"8 years",phone:"9876543218",photo:"https://randomuser.me/api/portraits/women/19.jpg"},
+{name:"Dr Michael Brown",spec:"Oncologist",exp:"14 years",phone:"9876543219",photo:"https://randomuser.me/api/portraits/men/20.jpg"}
+
 ];
 
 const doctorList=document.getElementById("doctorList");
@@ -371,19 +366,12 @@ const doctorList=document.getElementById("doctorList");
 doctors.forEach((d,i)=>{
 
 doctorList.innerHTML+=`
-
 <div class="card">
-
 <img src="${d.photo}">
-
 <h3>${d.name}</h3>
-
 <p>${d.spec}</p>
-
 <button onclick="viewDoctor(${i})">View Details</button>
-
 </div>
-
 `;
 
 });
@@ -395,19 +383,12 @@ const d=doctors[i];
 document.getElementById("doctorDetails").classList.remove("hidden");
 
 document.getElementById("doctorDetails").innerHTML=`
-
 <img src="${d.photo}">
-
 <h2>${d.name}</h2>
-
 <p><b>Specialization:</b> ${d.spec}</p>
-
 <p><b>Experience:</b> ${d.exp}</p>
-
 <p><b>Phone:</b> ${d.phone}</p>
-
-<p>Highly experienced doctor providing excellent treatment.</p>
-
+<p>Highly experienced doctor.</p>
 `;
 
 }
@@ -419,14 +400,12 @@ const illness=["Fever","Heart Disease","Cold","Cancer","Fracture"];
 let patients=[];
 
 for(let i=1;i<=20;i++){
-
 patients.push({
 name:"Patient "+i,
 disease:illness[i%5],
 doctor:doctors[i%10].name,
 history:"Regular treatment"
 })
-
 }
 
 const table=document.getElementById("patientTable");
@@ -438,22 +417,13 @@ table.innerHTML="";
 patients.forEach((p,index)=>{
 
 table.innerHTML+=`
-
 <tr>
-
 <td>${p.name}</td>
 <td>${p.disease}</td>
 <td>${p.doctor}</td>
 <td>${p.history}</td>
-
-<td>
-<button class="deleteBtn" onclick="deletePatient(${index})">
-Delete
-</button>
-</td>
-
+<td><button class="deleteBtn" onclick="deletePatient(${index})">Delete</button></td>
 </tr>
-
 `;
 
 });
@@ -461,11 +431,8 @@ Delete
 }
 
 function deletePatient(i){
-
 patients.splice(i,1);
-
 loadPatients();
-
 }
 
 loadPatients();
@@ -484,7 +451,30 @@ XLSX.writeFile(workbook,"Patients.xlsx");
 
 }
 
-/* APPOINTMENT */
+/* APPOINTMENTS */
+
+const appointmentList=document.getElementById("appointmentList");
+
+const autoAppointments=[
+
+"Ramesh appointment with Dr John Smith on 2026-03-12",
+"Suresh appointment with Dr Ravi Kumar on 2026-03-12",
+"Priya appointment with Dr Priya Sharma on 2026-03-13",
+"Kiran appointment with Dr David Lee on 2026-03-13",
+"Anitha appointment with Dr Anjali Mehta on 2026-03-14",
+"Rahul appointment with Dr Rahul Das on 2026-03-14",
+"Sneha appointment with Dr Neha Kapoor on 2026-03-15",
+"Arjun appointment with Dr Arjun Patel on 2026-03-15",
+"Fatima appointment with Dr Sara Khan on 2026-03-16",
+"David appointment with Dr Michael Brown on 2026-03-16"
+
+];
+
+autoAppointments.forEach(a=>{
+let li=document.createElement("li");
+li.innerText=a;
+appointmentList.appendChild(li);
+});
 
 function bookAppointment(){
 
@@ -496,7 +486,7 @@ let li=document.createElement("li");
 
 li.innerText=pname+" appointment with "+dname+" on "+date;
 
-document.getElementById("appointmentList").appendChild(li);
+appointmentList.appendChild(li);
 
 }
 
