@@ -85,16 +85,15 @@ gap:20px;
 
 .card{
 background:white;
-padding:15px;
+padding:20px;
 border-radius:10px;
 box-shadow:0 2px 8px rgba(0,0,0,0.2);
+text-align:center;
 }
 
-.card img{
-width:100%;
-height:180px;
-object-fit:cover;
-border-radius:10px;
+.card h2{
+margin:10px 0;
+color:#0077b6;
 }
 
 .hidden{
@@ -183,37 +182,95 @@ cursor:pointer;
 
 <div id="dashboard">
 
-<h2>🌍 Famous Hospitals Around The World</h2>
+<h2>🏥 Hospital Dashboard</h2>
 
 <div class="grid">
 
 <div class="card">
-<img src="images/hospital1.jpg">
-<h3>Johns Hopkins Hospital</h3>
-<p>USA – Famous for medical research and innovative treatment.</p>
+<h3>Total Nurses 👩‍⚕️</h3>
+<h2>45</h2>
+<p>Nurses working in the hospital.</p>
 </div>
 
 <div class="card">
-<img src="images/hospital2.jpg">
-<h3>Mayo Clinic</h3>
-<p>USA – One of the world's best hospitals for healthcare services.</p>
+<h3>Total Staff 👨‍💼</h3>
+<h2>120</h2>
+<p>Receptionists, technicians and other staff.</p>
 </div>
 
 <div class="card">
-<img src="images/hospital3.jpg">
-<h3>BLK-MAX Super Speciality Hospital</h3>
-<p>India – Known for advanced surgery and cancer treatment.</p>
+<h3>Emergency Cases 🚑</h3>
+<h2>18</h2>
+<p>Emergency patients today.</p>
 </div>
 
 <div class="card">
-<img src="images/hospital4.jpg">
-<h3>Max Healthcare</h3>
-<p>India – Modern hospital with world-class doctors.</p>
+<h3>Discharged Patients 📤</h3>
+<h2>12</h2>
+<p>Patients discharged today.</p>
+</div>
+
+<div class="card">
+<h3>Admitted Patients 🛌</h3>
+<h2>67</h2>
+<p>Currently admitted patients.</p>
+</div>
+
+<div class="card">
+<h3>Laboratory Reports 🔬</h3>
+<h2>95</h2>
+<p>Lab tests generated today.</p>
+</div>
+
+<div class="card">
+<h3>Pharmacy Orders 💊</h3>
+<h2>130</h2>
+<p>Medicines issued from pharmacy.</p>
+</div>
+
+<div class="card">
+<h3>Operation / Surgery Schedule 🔪</h3>
+<h2>6</h2>
+<p>Surgeries scheduled today.</p>
+</div>
+
+<div class="card">
+<h3>Billing / Payments 💳</h3>
+<h2>₹2,35,000</h2>
+<p>Total payments received.</p>
+</div>
+
+<div class="card">
+<h3>Ambulance Requests 🚑</h3>
+<h2>9</h2>
+<p>Ambulance bookings today.</p>
+</div>
+
+<div class="card">
+<h3>Departments 🏢</h3>
+<p>
+Cardiology<br>
+Neurology<br>
+Orthopedics<br>
+Dermatology<br>
+Pediatrics
+</p>
+</div>
+
+<div class="card">
+<h3>Upcoming Appointments ⏰</h3>
+<p>
+10:00 AM – Dr. Smith<br>
+11:30 AM – Dr. Kumar<br>
+1:00 PM – Dr. John<br>
+3:00 PM – Dr. Ravi
+</p>
 </div>
 
 </div>
 
 </div>
+
 
 <!-- DOCTORS -->
 
@@ -226,6 +283,7 @@ cursor:pointer;
 <div id="doctorDetails" class="card hidden"></div>
 
 </div>
+
 
 <!-- PATIENTS -->
 
@@ -256,6 +314,7 @@ cursor:pointer;
 </div>
 
 </div>
+
 
 <script>
 
@@ -317,7 +376,6 @@ doctors.forEach((d,i)=>{
 
 doctorList.innerHTML+=`
 <div class="card">
-<img src="https://randomuser.me/api/portraits/men/${i}.jpg">
 <h3>${d.name}</h3>
 <p>${d.speciality}</p>
 <button onclick="viewDoctor(${i})">View Details</button>
